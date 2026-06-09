@@ -6,6 +6,7 @@ import { OnboardingWizard } from './pages/OnboardingWizard';
 import { Dashboard } from './pages/Dashboard';
 import { TradeRoom } from './pages/TradeRoom';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { DemoBanner } from './components/DemoBanner';
 import { api, setNpub } from './api/client';
 
 type AppState = 'loading' | 'onboarding' | 'dashboard' | 'trade_room';
@@ -119,6 +120,10 @@ function UserApp() {
 
 export default function App() {
   const isAdmin = window.location.pathname.startsWith('/admin');
-  if (isAdmin) return <AdminGate />;
-  return <UserApp />;
+  return (
+    <>
+      <DemoBanner />
+      {isAdmin ? <AdminGate /> : <UserApp />}
+    </>
+  );
 }

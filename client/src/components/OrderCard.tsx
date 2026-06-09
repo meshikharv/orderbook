@@ -1,4 +1,4 @@
-import { Order } from '../../../shared/types';
+import type { Order } from '../../../shared/types';
 import { TrustBadge } from './TrustBadge';
 import { formatBTC, formatCurrency, timeAgo } from '../utils/format';
 

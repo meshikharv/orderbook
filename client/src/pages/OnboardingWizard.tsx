@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api } from '../api/client';
-import { Currency } from '../../../shared/types';
+import type { Currency } from '../../../shared/types';
 
 interface Props {
   npub: string;

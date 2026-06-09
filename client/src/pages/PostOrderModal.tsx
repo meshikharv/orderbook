@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Modal } from '../components/Modal';
 import { api } from '../api/client';
-import { Currency, OrderType } from '../../../shared/types';
+import type { Currency, OrderType } from '../../../shared/types';
 import { formatCurrency } from '../utils/format';
 
 interface Props {

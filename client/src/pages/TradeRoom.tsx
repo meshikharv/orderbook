@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Trade, Order } from '../../../shared/types';
+import type { Trade, Order } from '../../../shared/types';
 import { api } from '../api/client';
-import { TrustBadge } from '../components/TrustBadge';
+
 import { formatBTC, formatCurrency, shortNpub } from '../utils/format';
 
 interface Props {

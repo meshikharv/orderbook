@@ -1,3 +1,8 @@
+import { mockApi } from './mockClient';
+
+// When VITE_DEMO_MODE=true (GitHub Pages build), all calls go to the in-memory mock.
+const DEMO = import.meta.env.VITE_DEMO_MODE === 'true';
+
 const BASE = '/api';
 
 let currentNpub: string | null = null;
@@ -20,7 +25,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   return data as T;
 }
 
-export const api = {
+const realApi = {
   // Users
   getMe: () => request<{ exists: boolean; user?: any }>('/users/me'),
   onboard: (body: { fedi_username: string; country: string; preferred_currency: string }) =>
@@ -63,3 +68,5 @@ export const api = {
     return request<{ orders: any[] }>(`/admin/orders${qs}`);
   },
 };
+
+export const api: typeof realApi = DEMO ? (mockApi as typeof realApi) : realApi;

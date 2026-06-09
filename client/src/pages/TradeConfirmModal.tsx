@@ -1,5 +1,5 @@
 import { Modal } from '../components/Modal';
-import { Order } from '../../../shared/types';
+import type { Order } from '../../../shared/types';
 import { formatBTC, formatCurrency } from '../utils/format';
 import { TrustBadge } from '../components/TrustBadge';
 

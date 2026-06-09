@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Order, WsMessage, Currency } from '../../../shared/types';
+import type { Order, WsMessage, Currency } from '../../../shared/types';
 import { api } from '../api/client';
 import { OrderCard } from '../components/OrderCard';
 import { PostOrderModal } from './PostOrderModal';

@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { WsMessage } from '../../../shared/types';
+import type { WsMessage } from '../../../shared/types';
+
+const DEMO = import.meta.env.VITE_DEMO_MODE === 'true';
 
 type MessageHandler = (msg: WsMessage) => void;
 
 export function useWebSocket(onMessage: MessageHandler) {
+  // In demo/static mode there's no backend, so report connected and skip WS entirely.
+  if (DEMO) return { connected: true };  // eslint-disable-line react-hooks/rules-of-hooks
+
   const [connected, setConnected] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
   const retryRef = useRef<ReturnType<typeof setTimeout> | null>(null);

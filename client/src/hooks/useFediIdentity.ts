@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { MOCK_DEMO_USER } from '../api/mockData';
 
 // TODO: Confirm exact Fedi Mini App injection method with Fedi team. See https://docs.fedi.xyz
 
+const DEMO = import.meta.env.VITE_DEMO_MODE === 'true';
 const STORAGE_KEY = 'fedi_npub';
 
 export type IdentityState =
@@ -20,10 +22,14 @@ function isValidNpub(val: string): boolean {
 }
 
 export function useFediIdentity() {
-  const [state, setState] = useState<IdentityState>({ status: 'loading' });
-  const [npub, setNpubState] = useState<string | null>(null);
+  const demoPub = MOCK_DEMO_USER.npub;
+  const [state, setState] = useState<IdentityState>(
+    DEMO ? { status: 'resolved', npub: demoPub } : { status: 'loading' }
+  );
+  const [npub, setNpubState] = useState<string | null>(DEMO ? demoPub : null);
 
   useEffect(() => {
+    if (DEMO) return; // demo mode: identity already resolved above
     let detected: string | null = null;
 
     // Method 1 — URL query param
